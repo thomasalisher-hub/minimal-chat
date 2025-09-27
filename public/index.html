@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPANY COMMUNICATIONS TERMINAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="terminal-mode">
+    <!-- Terminal Effects -->
+    <div id="scan-line" class="scan-effect"></div>
+    <div id="crt-overlay" class="crt-effect"></div>
+    <div id="noise-overlay" class="noise-effect"></div>
+    
+    <div id="terminal-app">
+        <!-- Main Terminal Screen -->
+        <div id="main-terminal" class="screen active">
+            <div class="terminal-frame">
+                <!-- Terminal Header -->
+                <div class="terminal-header">
+                    <div class="company-logo">
+                        <pre class="ascii-logo">
+   ___ ___  __  __ ___ _  _  ___ _____ ___  
+  / __/ _ \|  \/  |_ _| \| |/ __|_   _/ _ \ 
+ | (_| (_) | |\/| || || .` | (__  | || (_) |
+  \___\___/|_|  |_|___|_|\_|\___| |_| \___/ 
+                        </pre>
+                    </div>
+                    <div class="terminal-status">
+                        <span class="status-item">STATUS: <span id="sys-status">STANDBY</span></span>
+                        <span class="status-item">PROTOCOL: WS-779</span>
+                        <span class="status-item">POWER: 100%</span>
+                    </div>
+                </div>
+                
+                <!-- Terminal Content -->
+                <div class="terminal-content">
+                    <div class="command-line">
+                        <span class="prompt">&gt;</span>
+                        <span class="command-text">SYSTEM READY</span>
+                    </div>
+                    
+                    <div class="main-menu">
+                        <div class="menu-item active" data-action="connect">
+                            [1] CONNECT TO NETWORK
+                        </div>
+                        <div class="menu-item" data-action="settings">
+                            [2] TERMINAL SETTINGS
+                        </div>
+                        <div class="menu-item" data-action="about">
+                            [3] ABOUT COMPANY
+                        </div>
+                    </div>
+                    
+                    <div class="input-section">
+                        <span class="input-prompt">&gt; SELECT OPTION [1-3]:</span>
+                        <input type="text" id="main-input" maxlength="1" class="terminal-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boot Sequence Screen -->
+        <div id="boot-screen" class="screen">
+            <div class="boot-terminal">
+                <div class="boot-header">
+                    <div class="boot-title">COMPANY COMMUNICATIONS BOOT SEQUENCE</div>
+                    <div class="boot-version">v2.3.7 // CLASSIFIED</div>
+                </div>
+                
+                <div class="boot-content">
+                    <div id="boot-messages"></div>
+                </div>
+                
+                <div class="boot-progress">
+                    <div class="progress-label">SYSTEM INITIALIZATION</div>
+                    <div class="progress-bar">
+                        <div id="boot-progress-bar" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-text"><span id="progress-percent">0%</span> COMPLETE</div>
+                </div>
+                
+                <div class="boot-hint">
+                    [PRESS ANY KEY TO ABORT BOOT SEQUENCE]
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Terminal Screen -->
+        <div id="chat-screen" class="screen">
+            <div class="chat-terminal">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <div class="chat-info">
+                        <span>ACTIVE CHANNEL: <span id="channel-id">[SCANNING]</span></span>
+                        <span>USERS: <span id="users-count">0/5</span></span>
+                        <span>STATUS: <span id="connection-status">CONNECTING...</span></span>
+                    </div>
+                    <div class="chat-controls">
+                        <button id="disconnect-btn" class="terminal-btn-small">[DISCONNECT]</button>
+                    </div>
+                </div>
+                
+                <!-- Messages Display -->
+                <div class="messages-terminal">
+                    <div id="messages-container" class="messages-display">
+                        <div class="system-message">
+                            COMPANY COMMUNICATIONS TERMINAL ACTIVE
+                        </div>
+                        <div class="system-message">
+                            ALL TRANSMISSIONS ARE ENCRYPTED AND ANONYMOUS
+                        </div>
+                        <div id="messages"></div>
+                    </div>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="input-terminal">
+                    <div class="input-line">
+                        <span class="input-prompt">&gt; MESSAGE:</span>
+                        <input type="text" id="message-input" placeholder="TYPE TRANSMISSION HERE" 
+                               maxlength="200" class="terminal-input">
+                        <button id="send-btn" class="terminal-btn-small">[SEND]</button>
+                    </div>
+                    <div class="input-hint">
+                        MAX LENGTH: 200 CHARACTERS // PRESS ENTER TO TRANSMIT
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
